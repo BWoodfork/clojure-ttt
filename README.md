@@ -1,1 +1,1 @@
-# clojure-ttt
+Welcome to my Clojure Tic-Tac-Toe game. I am in the process of building the game, so it currently is not functional. Check back in about 2-3 weeks =)
