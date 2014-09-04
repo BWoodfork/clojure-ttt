@@ -15,3 +15,11 @@
 (defn columns [ttt_board board_length]
   (apply mapv vector (rows ttt_board board_length)))
 
+(defn diagonals [ttt_board board_length]
+  (mapv vec [(take board_length (iterate (partial + (+ 1 board_length)) 0))
+             (take board_length (iterate (partial + (- board_length 1)) (- board_length 1)))]))
+
+(defn row_winner [ttt_board board_length]
+  (if (= (mapv (fn [index] (ttt_board index)) [0 1 2]) ["X" "X" "X"]) 
+    true 
+    false))
