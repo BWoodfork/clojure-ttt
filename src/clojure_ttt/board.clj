@@ -10,3 +10,6 @@
 
 (defn get_board_indexes [ttt_board]
   (into [] (range (count ttt_board))))
+
+(defn get_token [ttt_board index]
+  (get ttt_board index))

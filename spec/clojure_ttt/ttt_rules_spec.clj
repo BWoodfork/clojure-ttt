@@ -67,14 +67,36 @@
                                       nil nil nil nil
                                       nil nil nil nil] 4)))
 
-  (it "should check for a row win for 'X'"
-    (should= true (row_winner ["X" "X" "X"
-                               nil nil nil
-                               nil nil nil] 3)))
+  (it "should return all of the winning index combinations"
+    (should= [[0 1 2]
+              [3 4 5]
+              [6 7 8]
+              [0 3 6]
+              [1 4 7]
+              [2 5 8]
+              [0 4 8]
+              [2 4 6]] (all_winning_combinations [nil nil nil
+                                                  nil nil nil
+                                                  nil nil nil] 3)))
 
-  (it "should return false if there is no winner"
-    (should= false (row_winner [nil nil nil
-                                nil nil nil
-                                nil nil nil] 3)))
+  (it "should return true if all spaces are filled by the same token"
+    (should= true (all_spaces_filled_by_same_piece? ["X" "X" "X"] "X")))
+
+  (it "should return true if all spaces are filled by the same token"
+    (should= true (all_spaces_filled_by_same_piece? ["O" "O" "O"] "O")))
+
+  (it "should return the elements at the given index set"
+    (should= ["X" "O" "X"] (get_board_tokens [0 1 2] ["X" "O" "X"
+                                                      nil nil nil
+                                                      nil nil nil])))
+
+  (it "should return the elements at multiple index sets"
+    (should= [["X" "O" "X"]
+              ["O" "X" "X"]] (get_board_win_set [[0 1 2]
+                                                 [3 4 5]] ["X" "O" "X"
+                                                           "O" "X" "X"
+                                                           nil nil nil])))
+
+
 
   )

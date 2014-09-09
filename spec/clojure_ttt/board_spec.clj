@@ -33,4 +33,14 @@
                                                        nil nil nil
                                                        nil nil nil])))
 
+    (it "should return the token at a given index"
+      (should= "X" (get_token ["X" nil nil
+                               nil nil nil
+                               nil nil nil] 0)))
+
+    (it "should return the token at any given index"
+      (should= "O" (get_token [nil "O" nil
+                               nil nil nil
+                               nil nil nil] 1)))
+
 )
