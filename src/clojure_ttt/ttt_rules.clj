@@ -24,14 +24,16 @@
                 (columns ttt_board board_length) 
                 (diagonals ttt_board board_length)]))
 
-(defn all_spaces_filled_by_same_piece? [ttt_board token]
-  (if (every? #{token} ttt_board)
-    true
-    false))
-
-(defn get_board_tokens [position ttt_board]
+(defn get_combo_set [position ttt_board]
   (map ttt_board position))
 
-(defn get_board_win_set [combination ttt_board]
-  (map (fn [index] (get_board_tokens index ttt_board)) combination))
+(defn get_all_combo_sets [combination ttt_board]
+  (map (fn [index] (get_combo_set index ttt_board)) combination))
+
+(defn all_spaces_filled? [spaces]
+  (if (some nil? spaces) false true))
+
+(defn winning_combination? [combo]
+  (and (if (= (count (set combo)) 1) true false) 
+    (all_spaces_filled? combo)))
 

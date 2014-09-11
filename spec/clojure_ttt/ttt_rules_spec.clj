@@ -79,24 +79,35 @@
                                                   nil nil nil
                                                   nil nil nil] 3)))
 
-  (it "should return true if all spaces are filled by the same token"
-    (should= true (all_spaces_filled_by_same_piece? ["X" "X" "X"] "X")))
-
-  (it "should return true if all spaces are filled by the same token"
-    (should= true (all_spaces_filled_by_same_piece? ["O" "O" "O"] "O")))
-
   (it "should return the elements at the given index set"
-    (should= ["X" "O" "X"] (get_board_tokens [0 1 2] ["X" "O" "X"
-                                                      nil nil nil
-                                                      nil nil nil])))
+    (should= ["X" "O" "X"] (get_combo_set [0 1 2] ["X" "O" "X"
+                                                 nil nil nil
+                                                 nil nil nil])))
 
   (it "should return the elements at multiple index sets"
     (should= [["X" "O" "X"]
-              ["O" "X" "X"]] (get_board_win_set [[0 1 2]
-                                                 [3 4 5]] ["X" "O" "X"
-                                                           "O" "X" "X"
-                                                           nil nil nil])))
+              ["O" "X" "X"]] (get_all_combo_sets [[0 1 2]
+                                                  [3 4 5]] ["X" "O" "X"
+                                                            "O" "X" "X"
+                                                            nil nil nil])))
 
+  (it "should return true if all spaces on the board are occupied by tokens"
+    (should= true (all_spaces_filled? ["X" "O" "X"])))
+
+    (it "should return true if all spaces on the board are occupied by tokens"
+    (should= false (all_spaces_filled? [nil "X" "O"])))
+
+  (it "should return true if three elements are alike"
+    (should= true (winning_combination? ["X" "X" "X"])))
+
+  (it "should return true if three elements are alike"
+    (should= true (winning_combination? ["O" "O" "O"])))
+
+  (it "should return false if three elements are not alike"
+    (should= false (winning_combination? ["O" "O" "X"])))
+
+  (it "should return false is all elements are nil"
+    (should= false (winning_combination? [nil nil nil])))
 
 
   )
