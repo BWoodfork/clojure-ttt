@@ -94,7 +94,7 @@
   (it "should return true if all spaces on the board are occupied by tokens"
     (should= true (all_spaces_filled? ["X" "O" "X"])))
 
-    (it "should return true if all spaces on the board are occupied by tokens"
+  (it "should return true if all spaces on the board are occupied by tokens"
     (should= false (all_spaces_filled? [nil "X" "O"])))
 
   (it "should return true if three elements are alike"
@@ -108,6 +108,26 @@
 
   (it "should return false is all elements are nil"
     (should= false (winning_combination? [nil nil nil])))
+
+  (it "should return the winning moves"
+    (should= [["X" "X" "X"]] (game_winner? ["X" "X" "X"
+                                            "O" nil nil
+                                            nil nil nil])))
+
+   (it "should return the winning moves"
+    (should= [["O" "O" "O"]] (game_winner? ["O" "X" "X"
+                                            "O" nil nil
+                                            "O" nil nil])))
+
+   (it "should return the token of the game winner"
+    (should= "X" (get_winning_token ["X" "X" "X"
+                                     nil nil "O"
+                                     "O" nil nil])))
+
+   (it "should return the 'O' token as a game winner"
+    (should= "O" (get_winning_token ["O" "O" "O"
+                                     nil nil "X"
+                                     "X" nil nil])))
 
 
   )

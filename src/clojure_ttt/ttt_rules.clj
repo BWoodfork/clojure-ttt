@@ -30,10 +30,16 @@
 (defn get_all_combo_sets [combination ttt_board]
   (map (fn [index] (get_combo_set index ttt_board)) combination))
 
-(defn all_spaces_filled? [spaces]
-  (if (some nil? spaces) false true))
+(defn all_spaces_filled? [space]
+  (if (some nil? space) false true))
 
 (defn winning_combination? [combo]
-  (and (if (= (count (set combo)) 1) true false) 
+  (and (= (count (set combo)) 1) 
     (all_spaces_filled? combo)))
 
+(defn game_winner? [ttt_board]
+  (filter winning_combination? 
+    (get_all_combo_sets (all_winning_combinations ttt_board 3) ttt_board)))
+
+(defn get_winning_token [ttt_board]
+  (first (first (game_winner? ttt_board))))
