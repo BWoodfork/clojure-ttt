@@ -3,9 +3,6 @@
             [clojure-ttt.ttt_rules :refer :all]))
 
 (describe "tic tac toe rules"
-  (it "should return an 'X' and 'O' as valid game pieces"
-    (should= ["X" "O"] game_tokens))
-
   (it "should return the 'X' token when board count is odd"
     (should= "X" (current_token [nil nil nil
                                  nil nil nil
@@ -81,8 +78,8 @@
 
   (it "should return the elements at the given index set"
     (should= ["X" "O" "X"] (get_combo_set [0 1 2] ["X" "O" "X"
-                                                 nil nil nil
-                                                 nil nil nil])))
+                                                   nil nil nil
+                                                   nil nil nil])))
 
   (it "should return the elements at multiple index sets"
     (should= [["X" "O" "X"]
@@ -110,24 +107,43 @@
     (should= false (winning_combination? [nil nil nil])))
 
   (it "should return the winning moves"
-    (should= [["X" "X" "X"]] (game_winner? ["X" "X" "X"
-                                            "O" nil nil
-                                            nil nil nil])))
+    (should= [["X" "X" "X"]] (winning_set ["X" "X" "X"
+                                           "O" nil nil
+                                           nil nil nil])))
 
-   (it "should return the winning moves"
-    (should= [["O" "O" "O"]] (game_winner? ["O" "X" "X"
-                                            "O" nil nil
-                                            "O" nil nil])))
+  (it "should return the winning moves"
+    (should= [["O" "O" "O"]] (winning_set ["O" "X" "X"
+                                           "O" nil nil
+                                           "O" nil nil])))
 
-   (it "should return the token of the game winner"
+  (it "should return the token of the game winner"
     (should= "X" (get_winning_token ["X" "X" "X"
                                      nil nil "O"
                                      "O" nil nil])))
 
-   (it "should return the 'O' token as a game winner"
+  (it "should return the 'O' token as a game winner"
     (should= "O" (get_winning_token ["O" "O" "O"
                                      nil nil "X"
                                      "X" nil nil])))
 
+  (it "should return the 'O' token as a game winner"
+    (should= "X" (get_winning_token ["X" nil nil
+                                     "X" nil "O"
+                                     "X" "O" nil])))
+
+  (it "should return true if there is a tie game"
+    (should= true (tie_game? ["O" "X" "O"
+                              "X" "X" "O"
+                              "X" "O" "X"])))
+
+  (it "should return false if there is no tie game"
+    (should= false (tie_game? ["X" "O" "O"
+                               "X" "X" "O"
+                               "X" "O" "X"])))
+
+  (it "should return false if there is no tie game"
+    (should= false (tie_game? ["X" "O" "O"
+                               "X" "X" "O"
+                               "X" "O" nil])))
 
   )

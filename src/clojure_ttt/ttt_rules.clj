@@ -1,6 +1,8 @@
 (ns clojure-ttt.ttt_rules)
 
-(def game_tokens ["X" "O"])
+(def x_mark "X")
+
+(def o_mark "O")
 
 (defn current_token [ttt_board]
   (if (even? (count(remove nil? ttt_board))) "X" "O"))
@@ -37,9 +39,13 @@
   (and (= (count (set combo)) 1) 
     (all_spaces_filled? combo)))
 
-(defn game_winner? [ttt_board]
+(defn winning_set [ttt_board]
   (filter winning_combination? 
     (get_all_combo_sets (all_winning_combinations ttt_board 3) ttt_board)))
 
 (defn get_winning_token [ttt_board]
-  (first (first (game_winner? ttt_board))))
+  (first (first (winning_set ttt_board))))
+
+(defn tie_game? [ttt_board]
+  (and (nil? (get_winning_token ttt_board))
+    (game_over? ttt_board)))
