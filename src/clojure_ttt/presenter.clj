@@ -4,7 +4,12 @@
   (if (= spot nil) "_" spot))
 
 (defn make_rows [index]
-  (if (= (rem index 3) 0) \n "|"))
+  (if (= (rem index 3) 2) \newline "|"))
 
 (defn display_game_board [ttt_board]
-  "_|_|_\n_|_|_\n_|_|_")
+  (apply str 
+    (map-indexed 
+      (fn [index spot] 
+        (str (display_spot spot) 
+             (make_rows index))) 
+      ttt_board)))
