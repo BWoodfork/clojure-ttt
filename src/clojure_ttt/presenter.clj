@@ -1,15 +1,15 @@
 (ns clojure-ttt.presenter)
 
 (defn display_spot [spot]
-  (if (= spot nil) "_" spot))
+  (or spot "_"))
 
-(defn make_rows [index]
-  (if (= (rem index 3) 2) \newline "|"))
+(defn spots [ttt_board]
+  (map display_spot ttt_board))
+
+(defn- separators []
+  (cycle "||\n"))
 
 (defn display_game_board [ttt_board]
   (apply str 
-    (map-indexed 
-      (fn [index spot] 
-        (str (display_spot spot) 
-             (make_rows index))) 
-      ttt_board)))
+    (interleave (spots ttt_board)
+                (separators))))
