@@ -43,4 +43,14 @@
                                nil nil nil
                                nil nil nil] 1)))
 
+    (it "should return the indexes for empty spaces on the board"
+      (should= [0 1 2] (get_empty_spaces [nil nil nil
+                                          "X" "O" "X"
+                                          "X" "O" "X"])))
+
+    (it "should return the indexes for empty spaces on the board"
+      (should= [3 4 5] (get_empty_spaces ["X" "O" "X"
+                                          nil nil nil
+                                          "X" "O" "X"])))
+
 )

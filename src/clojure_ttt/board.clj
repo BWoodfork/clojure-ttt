@@ -13,3 +13,10 @@
 
 (defn get_token [ttt_board index]
   (get ttt_board index))
+
+(defn get_empty_spaces [ttt_board]
+  (remove nil? 
+    (into [] 
+    (map-indexed 
+      (fn [idx itm] (if (= itm nil) idx)) 
+    ttt_board))))
