@@ -5,8 +5,51 @@
 (defn get_input [value]
   (read-string (read-line)))
 
-(defn run_game [ttt_board]
-    display_game_board ttt_board)
+(defprotocol Player
+  (get-move [this board]))
+
+(def human-player
+  (reify Player
+    (get-move [this board]
+      (read))))
+
+(def computer-player
+  (reify Player
+    (get-move [this board]
+      (minimax [board]))))
+
+(def mock-player
+  (reify Player
+    (get-move [this board]
+      ([1 2 3 4 5]))))
+
+(defprotocol Listener
+  (move-made [this board]))
+
+(def screen
+  (reify Listener
+    (move-made [this board]
+      (print-screen! board))))
+
+(def mock-screen
+  (reify Listener
+    (move-made [this board]
+      (do-something-that-easy-to-test))))
+
+(defn run-game [board players listener]
+  (while (not (game-over? board))
+    (doseq [player players]
+      (let [move (get-move player)]
+        (make-move board move)
+        (move-made listener board)))))
+
+(defn -main []
+  (run-game empty-board 
+            [human-player computer-player]))
+
+; (defn run_game [ttt_board]
+;   (if (= (game_over? ttt_board) false)
+;     (display_game_board ttt_board)))
 
 ; (defn make_move [ttt_board]
     ;if current player is ai, get best move
