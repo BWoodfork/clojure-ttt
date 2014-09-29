@@ -5,7 +5,7 @@
 (def o_mark "O")
 
 (defn current_token [ttt_board]
-  (if (even? (count(remove nil? ttt_board))) "X" "O"))
+  (if (even? (count(remove nil? ttt_board))) x_mark o_mark))
 
 (defn game_over? [ttt_board]
   (if (some nil? ttt_board) false true))
