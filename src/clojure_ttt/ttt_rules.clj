@@ -7,9 +7,6 @@
 (defn current_token [ttt_board]
   (if (even? (count(remove nil? ttt_board))) x_mark o_mark))
 
-(defn game_over? [ttt_board]
-  (if (some nil? ttt_board) false true))
-
 (defn rows [ttt_board board_length]
   (mapv vec (partition board_length 
     (range (count ttt_board)))))
@@ -47,5 +44,9 @@
   (first (first (winning_set ttt_board))))
 
 (defn tie_game? [ttt_board]
-  (and (nil? (get_winning_token ttt_board))
-    (game_over? ttt_board)))
+  (= (winning_set ttt_board) ()))
+
+(defn game_over? [ttt_board]
+  (and (winning_set ttt_board)
+    (all_spaces_filled? [])))
+

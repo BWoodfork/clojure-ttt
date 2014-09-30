@@ -3,8 +3,7 @@
   (:use [clojure-ttt.ttt_rules :only [tie_game?]]))
 
 (defn minimax [ttt_board]
-  (if (game_over? ttt_board) 0)
-  (if (tie_game? ttt_board) -1))
+  (game_over? ttt_board))
 
 
 

@@ -19,9 +19,19 @@
                                  nil nil nil])))
 
   (it "should return false if game is still in play"
-    (should= false (game_over? ["X" "O" nil
-                                nil nil nil
-                                nil nil nil])))
+    (should= true (game_over? ["O" "X" "O"
+                               "X" "X" "O"
+                               "X" "O" "X"])))
+
+  (it "should return false if game is still in play"
+    (should= true (game_over? ["X" "X" "X"
+                               nil nil nil
+                               nil nil nil])))
+
+  (it "should return true if game is over"
+    (should= true (game_over? ["X" "O" "X"
+                               "O" "X" "O"
+                               "X" "O" "X"])))
 
   (it "should return true if game is over"
     (should= true (game_over? ["X" "O" "X"

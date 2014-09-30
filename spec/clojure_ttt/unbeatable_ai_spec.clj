@@ -3,15 +3,8 @@
             [clojure-ttt.unbeatable_ai :refer :all]))
 
 (describe "unbeatable ai"
-  (xit "should return the game winning move"
-    (should= 8 (minimax ["X" "O" nil
-                         nil "X" "O"
-                         nil nil nil])))
-
-  (xit "should return the game winning move"
-  (should= 6 (minimax ["X" "O" "O"
-                       "X" nil nil
-                       nil nil nil])))
-
-
-)
+  (it "should return a score of -1 if the game is over"
+    (let [current_board ["X" "X" "X"
+                         nil nil nil
+                         nil nil nil]]
+          (should= -1 (minimax current_board)))))
