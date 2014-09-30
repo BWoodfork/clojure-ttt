@@ -43,10 +43,10 @@
 (defn get_winning_token [ttt_board]
   (first (first (winning_set ttt_board))))
 
-(defn tie_game? [ttt_board]
-  (= (winning_set ttt_board) ()))
-
 (defn game_over? [ttt_board]
   (and (winning_set ttt_board)
     (all_spaces_filled? [])))
 
+(defn tie_game? [ttt_board]
+  (and (= (winning_set ttt_board) ())
+          (game_over? ttt_board)))
