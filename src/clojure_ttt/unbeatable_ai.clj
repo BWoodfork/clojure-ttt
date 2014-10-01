@@ -2,22 +2,37 @@
   (:use [clojure-ttt.ttt_rules :only [game_over?]])
   (:use [clojure-ttt.ttt_rules :only [tie_game?]])
   (:use [clojure-ttt.board :only [get_empty_spaces]])
-  (:use [clojure-ttt.board :only [fill_space]]))
+  (:use [clojure-ttt.board :only [fill_space]])
+  (:use [clojure-ttt.ttt_rules :only [current_token]]))
 
 (defn score_board [ttt_board]
   (cond 
-    (and (game_over? ttt_board)
-    (not (tie_game? ttt_board))) 
-      -1
-    (tie_game? ttt_board) 
-      0))
+    (not (game_over? ttt_board)) nil
+    (and (game_over? ttt_board) (not (tie_game? ttt_board))) -1
+    (tie_game? ttt_board) 0
+  ))
+
+(def scores
+    {})
+
+(def depth
+  0)
 
 (defn minimax [ttt_board]
-  (let [current_board (atom ttt_board)]
-    (doseq [space (get_empty_spaces current_board)]
-      (fill_space current_board space "X"))))  
+  (map (fn [board]
+    (score_board board))
+    (map (fn [space]
+            (fill_space ttt_board space (current_token ttt_board))) 
+            (get_empty_spaces ttt_board))))
 
-
+; (defn minimax
+;   ([ttt_board depth]
+;     [ttt_board]
+;       (map (fn [space]
+;         (fill_space ttt_board space (current_token ttt_board))
+;         (assoc scores space (minimax ttt_board (inc depth)))
+;           space = nil)
+;       (get_empty_spaces ttt_board))))
 
 ; defn minimax
 ; return 0 if tie game

@@ -23,10 +23,10 @@
                                "X" "X" "O"
                                "X" "O" "X"])))
 
-  (it "should return false if game is still in play"
-    (should= true (game_over? ["X" "X" "X"
-                               nil nil nil
-                               nil nil nil])))
+  (it "should return true if game is over and there are empty spaces left"
+    (should= true (game_over? ["X" "O" "O"
+                               nil "X" nil
+                               nil nil "X"])))
 
   (it "should return true if game is over"
     (should= true (game_over? ["X" "O" "X"
@@ -101,8 +101,11 @@
   (it "should return true if all spaces on the board are occupied by tokens"
     (should= true (all_spaces_filled? ["X" "O" "X"])))
 
-  (it "should return true if all spaces on the board are occupied by tokens"
+  (it "should return false if one space is available"
     (should= false (all_spaces_filled? [nil "X" "O"])))
+
+  (it "should return false if all spaces are nil"
+    (should= false (all_spaces_filled? [nil nil nil])))
 
   (it "should return true if three elements are alike"
     (should= true (winning_combination? ["X" "X" "X"])))
@@ -125,6 +128,11 @@
     (should= [["O" "O" "O"]] (winning_set ["O" "X" "X"
                                            "O" nil nil
                                            "O" nil nil])))
+
+  (it "returns an empty list if no winning set"
+    (should= () (winning_set ["X" "O" "X"
+                              "O" "X" "O"
+                              nil nil nil])))
 
   (it "should return the token of the game winner"
     (should= "X" (get_winning_token ["X" "X" "X"
@@ -151,9 +159,14 @@
                                "X" "X" "O"
                                "X" "O" "X"])))
 
-  (it "should return false if there is no tie game"
+  (it "should return false if there is one space empty"
     (should= false (tie_game? ["X" "O" "O"
                                "X" "X" "O"
                                "X" "O" nil])))
+
+  (it "should return false if there are three empty spaces"
+    (should= false (tie_game? ["X" "O" "X"
+                               "O" "X" "O"
+                               nil nil nil])))
 
   )

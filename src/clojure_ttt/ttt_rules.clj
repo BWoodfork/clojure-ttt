@@ -44,8 +44,9 @@
   (first (first (winning_set ttt_board))))
 
 (defn game_over? [ttt_board]
-  (and (winning_set ttt_board)
-    (all_spaces_filled? [])))
+  (if 
+    (not (= (winning_set ttt_board) ())) true 
+      (if (all_spaces_filled? ttt_board) true false)))
 
 (defn tie_game? [ttt_board]
   (and (= (winning_set ttt_board) ())
