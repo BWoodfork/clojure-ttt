@@ -18,6 +18,11 @@
                                  nil nil nil
                                  nil nil nil])))
 
+  (it "should return the 'O' token after 5 moves have been made"
+    (should= "O" (current_token ["X" "O" nil
+                                 nil "X" nil 
+                                 "X" nil "O"])))
+
   (it "should return false if game is still in play"
     (should= true (game_over? ["O" "X" "O"
                                "X" "X" "O"

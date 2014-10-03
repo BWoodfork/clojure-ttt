@@ -7,23 +7,43 @@
 
 (defn score_board [ttt_board]
   (cond 
-    (not (game_over? ttt_board)) nil
     (and (game_over? ttt_board) (not (tie_game? ttt_board))) -1
     (tie_game? ttt_board) 0
   ))
 
-(def scores
-    {})
+(defn get_move [ttt_board]
+  (get_empty_spaces ttt_board))
 
-(def depth
-  0)
+(defn board_after_move [ttt_board move index]
+  (fill_space ttt_board index move))
 
 (defn minimax [ttt_board]
-  (map (fn [board]
-    (score_board board))
-    (map (fn [space]
-            (fill_space ttt_board space (current_token ttt_board))) 
-            (get_empty_spaces ttt_board))))
+  (* -1 (score_board (board_after_move ttt_board 
+                  (current_token ttt_board)
+                    (first (get_move ttt_board))))))
+
+
+
+; (defn minimax
+;   ([ttt_board]
+;     (minimax ttt_board 0))
+;   ([ttt_board depth]
+;   (let [updated_board (board_after_move ttt_board)]
+;     (println (get_move ttt_board))
+;     (if (game_over? updated_board)
+;       {(get_move ttt_board) (score_board updated_board)}
+;       [(* -1 (minimax updated_board (inc depth)))]))))
+
+; (defn minimax [ttt_board]
+;   (let [updated_board (board_after_move ttt_board)]
+;     (if (game_over? ttt_board)
+;       [(score_board updated_board)])))
+
+; (defn change_this [ttt_board move]
+;   (let [updated_board (minimax ttt_board)]
+;     (fill_space updated_board move (current_token ttt_board))
+;       (if (game_over? updated_board)
+;         [(score_board updated_board) move])))
 
 ; (defn minimax
 ;   ([ttt_board depth]
