@@ -3,26 +3,55 @@
   (:use [clojure-ttt.ttt_rules :only [tie_game?]])
   (:use [clojure-ttt.board :only [get_empty_spaces]])
   (:use [clojure-ttt.board :only [fill_space]])
-  (:use [clojure-ttt.ttt_rules :only [current_token]]))
+  (:use [clojure-ttt.ttt_rules :only [current_token]])
+  (:use [clojure-ttt.ttt_rules :only [get_winning_token]])
+  (:use [clojure-ttt.ttt_rules :only [opponent_token]]))
 
 (defn score_board [ttt_board]
   (cond 
-    (and (game_over? ttt_board) (not (tie_game? ttt_board))) -1
-    (tie_game? ttt_board) 0
+    (= (get_winning_token ttt_board) "X") 1
+    (= (get_winning_token ttt_board) nil) 0
+    :else -1
   ))
 
-(defn get_move [ttt_board]
+(defn get_moves [ttt_board]
   (get_empty_spaces ttt_board))
 
-(defn board_after_move [ttt_board move index]
-  (fill_space ttt_board index move))
+(defn board_after_move [ttt_board token index]
+  (fill_space ttt_board index token))
 
-(defn minimax [ttt_board]
-  (* -1 (score_board (board_after_move ttt_board 
-                  (current_token ttt_board)
-                    (first (get_move ttt_board))))))
+(defn switch_player_mark [current_mark]
+  (if (= current_mark "O")
+    "X"
+    "O"))
+
+(defn score_moves [ttt_board]
+  (mapcat (fn [boxed_moves] 
+    (map (fn [numbered_moves] 
+      (* -1 (score_board
+                (board_after_move ttt_board 
+                  (current_token ttt_board) 
+                  numbered_moves)))) boxed_moves))
+      (map (fn [space] [space])
+          (get_moves ttt_board))))
+
+(defn minimax [ttt_board token index]
+  (let [new-board (board_after_move ttt_board token index)]
+    (if (game_over? new-board)
+      [(score_board new-board) index]
+      [(score_moves new-board) index])))
 
 
+; (defn score_moves [ttt_board]
+;   (* -1 (score_board (board_after_move ttt_board 
+;                   (current_token ttt_board)
+;                     (println (apply max-key first (map (partial ) (get_moves ttt_board))))))))
+
+; (defn score_moves [ttt_board]
+;   (apply max-key first (map (partial * -1)
+;     [(score_board (board_after_move ttt_board 
+;           (current_token ttt_board) 
+;             (first (get_moves ttt_board))))])))
 
 ; (defn minimax
 ;   ([ttt_board]
