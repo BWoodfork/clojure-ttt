@@ -7,11 +7,11 @@
   (:use [clojure-ttt.ttt_rules :only [get_winning_token]])
   (:use [clojure-ttt.ttt_rules :only [opponent_token]]))
 
-(defn score_board [ttt_board]
+(defn score_board [ttt_board player-mark]
   (cond 
-    (= (get_winning_token ttt_board) "X") 1
+    (= (get_winning_token ttt_board) player-mark) 1
+    (and (not= (get_winning_token ttt_board) nil) (not= (get_winning_token ttt_board) player-mark)) -1
     (= (get_winning_token ttt_board) nil) 0
-    :else -1
   ))
 
 (defn get_moves [ttt_board]
@@ -25,22 +25,44 @@
     "X"
     "O"))
 
-(defn score_moves [ttt_board]
-  (mapcat (fn [boxed_moves] 
-    (map (fn [numbered_moves] 
-      (* -1 (score_board
-                (board_after_move ttt_board 
-                  (current_token ttt_board) 
-                  numbered_moves)))) boxed_moves))
-      (map (fn [space] [space])
-          (get_moves ttt_board))))
+(defn score_moves [ttt_board player-mark]
+  (map (fn [space]
+         (score_board (board_after_move ttt_board 
+                        (current_token ttt_board) 
+                          space) 
+                           player-mark))
+       (get_moves ttt_board)))
 
-(defn minimax [ttt_board token index]
+(defn get_minimax_move [depth moves]
+  )
+
+(defn minimax 
+ ([ttt_board token index]
+  (minimax ttt_board token index 0))
+ ([ttt_board token index depth]
   (let [new-board (board_after_move ttt_board token index)]
     (if (game_over? new-board)
-      [(score_board new-board) index]
-      [(score_moves new-board) index])))
+      [(score_board new-board (current_token new-board)) index]
+      
 
+      ;; set up state
+      [(score_moves new-board (current_token new-board)) index]
+      
+
+      ))))
+
+; (defn recurse-into-minimax-tree [move-scores index depth extra-state-here]
+;   ;;; ???
+;   (minimax ?board ?token ?index (inc depth))
+;   )
+
+; (defn foo 
+;   ([x] (foo x []))
+;   ([x xs]
+;     (if (< 0 x)
+;       (do (println (dec x))
+;           (recur (dec x) (conj xs x)))
+;       xs)))
 
 ; (defn score_moves [ttt_board]
 ;   (* -1 (score_board (board_after_move ttt_board 
