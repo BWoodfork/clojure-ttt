@@ -13,3 +13,6 @@
         (str (display_spot spot) 
              (make_rows index))) 
       ttt_board)))
+
+(defn print_game_board [ttt_board]
+  (println (display_game_board ttt_board)))

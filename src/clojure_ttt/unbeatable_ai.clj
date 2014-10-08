@@ -33,20 +33,15 @@
                            player-mark))
        (get_moves ttt_board)))
 
-(defn get_minimax_move [depth moves]
-  )
 
-(defn minimax 
+(defn minimax
  ([ttt_board token index]
   (minimax ttt_board token index 0))
  ([ttt_board token index depth]
   (let [new-board (board_after_move ttt_board token index)]
     (if (game_over? new-board)
       [(score_board new-board (current_token new-board)) index]
-      
-
-      ;; set up state
-      [(score_moves new-board (current_token new-board)) index]
+      [:dosomethinghere]
       
 
       ))))

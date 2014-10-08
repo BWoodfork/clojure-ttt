@@ -28,10 +28,10 @@
                                   nil nil nil 
                                   nil nil nil])))
 
-  (it "should return false if game is still in play"
-    (should= true (game_over? ["O" "X" "O"
-                               "X" "X" "O"
-                               "X" "O" "X"])))
+  (it "should return false if board is empty"
+    (should= false (game_over? [nil nil nil
+                                nil nil nil
+                                nil nil nil])))
 
   (it "should return true if game is over and there are empty spaces left"
     (should= true (game_over? ["X" "O" "O"

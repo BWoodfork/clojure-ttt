@@ -104,16 +104,16 @@
                              "X" nil nil]]
               (should= [-1 7] (minimax game-over-board "O" 7 0))))
 
-    (it "should return score and the move for a potential win for 'X'"
-      (let [game-over-board ["X" nil nil
-                             nil nil nil
-                             nil nil nil]]
-              (should= ['(0 0 0 0 0 0 0) 4] (minimax game-over-board "O" 4 0))))
+    ; (it "should return score and the move for a potential win for 'X'"
+    ;   (let [game-over-board ["X" nil nil
+    ;                          nil nil nil
+    ;                          nil nil nil]]
+    ;           (should= ['(0 0 0 0 0 0 0) 4] (minimax game-over-board "O" 4 0))))
 
-    (it "should return score and the move for a potential win for 'X'"
-      (let [game-over-board ["X" nil nil
-                             nil "O" nil
-                             "X" nil nil]]
-              (should= ['(0 0 0 0 0) 3] (minimax game-over-board "O" 3 0))))
+    ; (it "should return score and the move for a potential win for 'X'"
+    ;   (let [game-over-board ["X" nil nil
+    ;                          nil "O" nil
+    ;                          "X" nil nil]]
+    ;           (should= ['(0 0 0 0 0) 3] (minimax game-over-board "O" 3 0))))
 
 )
