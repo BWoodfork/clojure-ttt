@@ -14,22 +14,18 @@
 
 (defn get_current_player_move [ttt_board number]
   (if (even? number)
-    (get_computer_move ttt_board)
-    (get_player_move ttt_board)))
+    (get_player_move ttt_board)
+    (get_computer_move ttt_board)))
 
 (defn run_game []
-    (def board
-      (loop [board_in_play (ttt_board board_length)
-            turn_number 0]
-        (when (not (game_over? board_in_play))
-          (do 
-            (print_game_board board_in_play)
-            board_in_play)
-          (println turn_number)
-          (recur
-            turn_number
-            (fill_space board_in_play (get_current_player_move board_in_play turn_number) (current_token board_in_play))))))
-    (print_game_board board))
+  (loop [board_in_play (ttt_board board_length)
+         turn_count 0]
+        (if (game_over? board_in_play)
+          "FOOO"
+          (let [new-board (fill_space board_in_play (get_current_player_move board_in_play turn_count) (current_token board_in_play))]
+            (print_game_board new-board)
+            (recur new-board
+              (+ 1 turn_count))))))
 
-(defn main []
- (print_game_board (run_game)))
+(defn -main []
+ (run_game))
