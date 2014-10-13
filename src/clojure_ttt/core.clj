@@ -1,5 +1,4 @@
 (ns clojure-ttt.core
-  (:use [clojure-ttt.presenter :only [display-game-board]])
   (:use [clojure-ttt.ttt_rules :only [game-over?]])
   (:use [clojure-ttt.ttt_rules :only [current-token]])
   (:use [clojure-ttt.board :only [ttt-board]])

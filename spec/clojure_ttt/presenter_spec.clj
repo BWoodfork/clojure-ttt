@@ -4,13 +4,13 @@
 
 (describe "presenter"
   (it "display an empty string if spot is nil"
-    (should= "_" (display-spot nil)))
+    (should= 0 (display-spot 0 nil)))
 
   (it "should display game tokens"
-    (should= "X" (display-spot "X")))
+    (should= "X" (display-spot 0 "X")))
 
   (it "should display all game tokens"
-    (should= "O" (display-spot "O")))
+    (should= "O" (display-spot 0 "O")))
 
   (it "should create a new line if board index mod is 0"
     (should= \newline (make-rows 2 )))
@@ -19,7 +19,7 @@
     (should= "|" (make-rows 1)))
 
   (it "should display the game board"
-    (should= "_|_|_\n_|_|_\n_|_|_\n" (display-game-board [nil nil nil
+    (should= "0|1|2\n3|4|5\n6|7|8\n" (display-game-board [nil nil nil
                                                           nil nil nil
                                                           nil nil nil])))
 

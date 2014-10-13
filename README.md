@@ -1,1 +1,1 @@
-Welcome to my Clojure Tic-Tac-Toe game. I am in the process of building the game, so it currently is not functional. Check back in about 2-3 weeks =)
+This is my Clojure Tic-Tac-Toe game. I'm currently adding features to it, but it is fully functional as of October 13th 2014. The only option currently is to play human vs the unbeatable computer. If you think you can beat the computer, go ahead and click on the 'git clone' button on this page. Open the directory that you've cloned this to and type 'lein run' (without the quotes) and the game will run for you! Good luck!
