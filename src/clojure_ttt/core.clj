@@ -8,7 +8,8 @@
   (:use [clojure-ttt.presenter :only [print-game-board]])
   (:use [clojure-ttt.player :only [get-player-move]])
   (:use [clojure-ttt.player :only [get-computer-move]])
-  (:use [clojure-ttt.ttt_rules :only [get-winning-token]]))
+  (:use [clojure-ttt.ttt_rules :only [get-winning-token]])
+  (:use [clojure-ttt.ui]))
 
 (defn get-move []
   (Integer. (read-line)))
@@ -19,15 +20,18 @@
     (get-computer-move ttt-board)))
 
 (defn run-game []
+  (newline)
+  (println "Welcome to Tic-Tac-Toe. The grid is numbered from 0-8. Select a number to fill in a space with your token.")
+  (newline)
+  (print-game-board (ttt-board board-length))
   (loop [board-in-play (ttt-board board-length)
          turn-count 0]
         (if (game-over? board-in-play)
-          (println (get-winning-token board-in-play) "wins this match sucka!")
+          (println (get-winning-token board-in-play))
           (let [new-board (fill-space board-in-play (get-current-player-move board-in-play turn-count) (current-token board-in-play))]
             (print-game-board new-board)
             (recur new-board
               (inc turn-count))))))
 
 (defn -main []
-(print-game-board (ttt-board board-length))
  (run-game))

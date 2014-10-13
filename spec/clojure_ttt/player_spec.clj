@@ -17,32 +17,21 @@
       (with-in-str "2"
         (get-move-number))))
 
-  ; (it "gets the move of the current player on the board"
-  ;   (let [board [nil "X" "X"
-  ;                "O" "O" nil
-  ;                nil nil nil]]
-  ;         (should= 1
-  ;           (with-in-str "1"
-  ;             (get-player-move board)))))
+  (it "gets the move of the computer player on the board"
+    (let [board ["X" nil nil
+                 nil "O" nil
+                 "X" nil nil]]
+          (should= 3
+            (with-in-str "3"
+              (get-computer-move board)))))
 
-  ; (it "gets the move of the current player on the board"
-  ;   (let [board ["X" nil "X"
-  ;                "O" "O" nil
-  ;                nil nil nil]]
-  ;         (should= 1
-  ;           (with-in-str "1"
-  ;             (get-player-move board)))))
-
-  ; (it "gets the move of the current player on the board"
-  ;   (let [board [nil nil nil
-  ;                nil nil nil
-  ;                nil nil nil]]
-  ;         (should= 2
-  ;           (with-in-str "2"
-  ;             (get-comp-move board "X")))))
-
-  ; (it "should switch the player who's turn it is"
-  ;   )
+  (it "gets the move of the current human player on the board"
+    (let [board ["X" nil nil
+                 nil nil nil
+                 nil nil nil]]
+          (should= 0
+            (with-in-str "0"
+              (get-player-move board)))))
 
 )
 
