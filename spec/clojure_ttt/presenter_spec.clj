@@ -4,22 +4,22 @@
 
 (describe "presenter"
   (it "display an empty string if spot is nil"
-    (should= "_" (display_spot nil)))
+    (should= "_" (display-spot nil)))
 
   (it "should display game tokens"
-    (should= "X" (display_spot "X")))
+    (should= "X" (display-spot "X")))
 
   (it "should display all game tokens"
-    (should= "O" (display_spot "O")))
+    (should= "O" (display-spot "O")))
 
   (it "should create a new line if board index mod is 0"
-    (should= \newline (make_rows 2 )))
+    (should= \newline (make-rows 2 )))
 
   (it "should insert a pipe when index is 1"
-    (should= "|" (make_rows 1)))
+    (should= "|" (make-rows 1)))
 
   (it "should display the game board"
-    (should= "_|_|_\n_|_|_\n_|_|_\n" (display_game_board [nil nil nil
+    (should= "_|_|_\n_|_|_\n_|_|_\n" (display-game-board [nil nil nil
                                                           nil nil nil
                                                           nil nil nil])))
 

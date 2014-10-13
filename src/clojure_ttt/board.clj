@@ -1,29 +1,29 @@
 (ns clojure-ttt.board
-  (:use [clojure-ttt.ttt_rules :only [current_token]]))
+  (:use [clojure-ttt.ttt_rules :only [current-token]]))
 
-(def board_length 
+(def board-length 
   3)
 
-(defn ttt_board [board_length]
-  (into [] (take (* board_length board_length) (repeat nil))))
+(defn ttt-board [board-length]
+  (into [] (take (* board-length board-length) (repeat nil))))
 
-(defn valid_move? [ttt_board index]
-  (and (nil? (get ttt_board index))
+(defn valid-move? [ttt-board index]
+  (and (nil? (get ttt-board index))
             (contains? [0 1 2 3 4 5 6 7 8] index)))
 
-(defn fill_space [ttt_board index token]
-  (if (valid_move? ttt_board index)
-    (assoc ttt_board index (current_token ttt_board))))
+(defn fill-space [ttt-board index token]
+  (if (valid-move? ttt-board index)
+    (assoc ttt-board index (current-token ttt-board))))
 
-(defn get_board_indexes [ttt_board]
-  (into [] (range (count ttt_board))))
+(defn get-board-indexes [ttt-board]
+  (into [] (range (count ttt-board))))
 
-(defn get_token [ttt_board index]
-  (get ttt_board index))
+(defn get-token [ttt-board index]
+  (get ttt-board index))
 
-(defn get_empty_spaces [ttt_board]
+(defn get-empty-spaces [ttt-board]
   (remove nil? 
     (into [] 
     (map-indexed 
       (fn [idx itm] (if (= itm nil) idx)) 
-    ttt_board))))
+    ttt-board))))

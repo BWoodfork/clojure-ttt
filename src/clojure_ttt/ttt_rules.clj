@@ -1,56 +1,56 @@
 (ns clojure-ttt.ttt_rules)
 
-(def x_mark "X")
+(def x-mark "X")
 
-(def o_mark "O")
+(def o-mark "O")
 
-(defn current_token [ttt_board]
-  (if (even? (count(remove nil? ttt_board))) x_mark o_mark))
+(defn current-token [ttt-board]
+  (if (even? (count(remove nil? ttt-board))) x-mark o-mark))
 
-(defn opponent_token [ttt_board]
-  (if (odd? (count(remove nil? ttt_board))) o_mark x_mark))
+(defn opponent-token [ttt-board]
+  (if (odd? (count(remove nil? ttt-board))) o-mark x-mark))
 
-(defn rows [ttt_board board_length]
-  (mapv vec (partition board_length 
-    (range (count ttt_board)))))
+(defn rows [ttt-board board-length]
+  (mapv vec (partition board-length 
+    (range (count ttt-board)))))
 
-(defn columns [ttt_board board_length]
-  (apply mapv vector (rows ttt_board board_length)))
+(defn columns [ttt-board board-length]
+  (apply mapv vector (rows ttt-board board-length)))
 
-(defn diagonals [ttt_board board_length]
-  (mapv vec [(take board_length (iterate (partial + (+ 1 board_length)) 0))
-             (take board_length (iterate (partial + (- board_length 1)) (- board_length 1)))]))
+(defn diagonals [ttt-board board-length]
+  (mapv vec [(take board-length (iterate (partial + (+ 1 board-length)) 0))
+             (take board-length (iterate (partial + (- board-length 1)) (- board-length 1)))]))
 
-(defn all_winning_combinations [ttt_board board_length]
-  (reduce into [(rows ttt_board board_length) 
-                (columns ttt_board board_length) 
-                (diagonals ttt_board board_length)]))
+(defn all-winning-combinations [ttt-board board-length]
+  (reduce into [(rows ttt-board board-length) 
+                (columns ttt-board board-length) 
+                (diagonals ttt-board board-length)]))
 
-(defn get_combo_set [position ttt_board]
-  (map ttt_board position))
+(defn get-combo-set [position ttt-board]
+  (map ttt-board position))
 
-(defn get_all_combo_sets [combination ttt_board]
-  (map (fn [index] (get_combo_set index ttt_board)) combination))
+(defn get-all-combo-sets [combination ttt-board]
+  (map (fn [index] (get-combo-set index ttt-board)) combination))
 
-(defn all_spaces_filled? [space]
+(defn all-spaces-filled? [space]
   (if (some nil? space) false true))
 
-(defn winning_combination? [combo]
+(defn winning-combination? [combo]
   (and (= (count (set combo)) 1) 
-    (all_spaces_filled? combo)))
+    (all-spaces-filled? combo)))
 
-(defn winning_set [ttt_board]
-  (filter winning_combination? 
-    (get_all_combo_sets (all_winning_combinations ttt_board 3) ttt_board)))
+(defn winning-set [ttt-board]
+  (filter winning-combination? 
+    (get-all-combo-sets (all-winning-combinations ttt-board 3) ttt-board)))
 
-(defn get_winning_token [ttt_board]
-  (first (first (winning_set ttt_board))))
+(defn get-winning-token [ttt-board]
+  (first (first (winning-set ttt-board))))
 
-(defn game_over? [ttt_board]
+(defn game-over? [ttt-board]
   (if 
-    (not (= (winning_set ttt_board) ())) true 
-      (if (all_spaces_filled? ttt_board) true false)))
+    (not (= (winning-set ttt-board) ())) true 
+      (if (all-spaces-filled? ttt-board) true false)))
 
-(defn tie_game? [ttt_board]
-  (and (= (winning_set ttt_board) ())
-          (game_over? ttt_board)))
+(defn tie-game? [ttt-board]
+  (and (= (winning-set ttt-board) ())
+          (game-over? ttt-board)))

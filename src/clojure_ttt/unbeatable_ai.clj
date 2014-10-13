@@ -1,41 +1,41 @@
 (ns clojure-ttt.unbeatable_ai
-  (:use [clojure-ttt.ttt_rules :only [game_over?]])
-  (:use [clojure-ttt.ttt_rules :only [tie_game?]])
-  (:use [clojure-ttt.board :only [get_empty_spaces]])
-  (:use [clojure-ttt.board :only [fill_space]])
-  (:use [clojure-ttt.ttt_rules :only [current_token]])
-  (:use [clojure-ttt.ttt_rules :only [get_winning_token]])
-  (:use [clojure-ttt.ttt_rules :only [opponent_token]]))
+  (:use [clojure-ttt.ttt_rules :only [game-over?]])
+  (:use [clojure-ttt.ttt_rules :only [tie-game?]])
+  (:use [clojure-ttt.board :only [get-empty-spaces]])
+  (:use [clojure-ttt.board :only [fill-space]])
+  (:use [clojure-ttt.ttt_rules :only [current-token]])
+  (:use [clojure-ttt.ttt_rules :only [get-winning-token]])
+  (:use [clojure-ttt.ttt_rules :only [opponent-token]]))
 
 (declare minimax)
-(declare get_best_scored_move)
+(declare get-best-scored-move)
 
-(defn score_board [ttt_board player_mark]
+(defn score-board [ttt-board player-mark]
   (cond 
-    (= (get_winning_token ttt_board) player_mark) 1
-    (and (not= (get_winning_token ttt_board) nil) (not= (get_winning_token ttt_board) player_mark)) 1
-    (= (get_winning_token ttt_board) nil) 0
+    (= (get-winning-token ttt-board) player-mark) 1
+    (and (not= (get-winning-token ttt-board) nil) (not= (get-winning-token ttt-board) player-mark)) 1
+    (= (get-winning-token ttt-board) nil) 0
   ))
 
-(defn get_moves [ttt_board]
-  (get_empty_spaces ttt_board))
+(defn get-moves [ttt-board]
+  (get-empty-spaces ttt-board))
 
-(defn board_after_move [ttt_board token index]
-  (fill_space ttt_board index token))
+(defn board-after-move [ttt-board token index]
+  (fill-space ttt-board index token))
 
-(defn switch_player_mark [current_mark]
-  (if (= current_mark "O")
+(defn switch-player-mark [current-mark]
+  (if (= current-mark "O")
     "X"
     "O"))
 
-(defn minimax [ttt_board token index]
-  (let [board_in_play (board_after_move ttt_board token index)]
-    (if (game_over? board_in_play)
-      [(score_board board_in_play token) index]
-      [(* -1 (first (get_best_scored_move board_in_play (switch_player_mark token)))) index])))
+(defn minimax [ttt-board token index]
+  (let [board-in-play (board-after-move ttt-board token index)]
+    (if (game-over? board-in-play)
+      [(score-board board-in-play token) index]
+      [(* -1 (first (get-best-scored-move board-in-play (switch-player-mark token)))) index])))
 
-(defn get_best_scored_move [ttt_board token]
-  (apply max-key first (map (partial minimax ttt_board token) (get_moves ttt_board))))
+(defn get-best-scored-move [ttt-board token]
+  (apply max-key first (map (partial minimax ttt-board token) (get-moves ttt-board))))
 
-(defn get_minimax_move [ttt_board token]
-  (second (get_best_scored_move ttt_board token)))
+(defn get-minimax-move [ttt-board token]
+  (second (get-best-scored-move ttt-board token)))

@@ -1,18 +1,18 @@
 (ns clojure-ttt.presenter)
 
-(defn display_spot [spot]
+(defn display-spot [spot]
   (if (= spot nil) "_" spot))
 
-(defn make_rows [index]
+(defn make-rows [index]
   (if (= (rem index 3) 2) \newline "|"))
 
-(defn display_game_board [ttt_board]
+(defn display-game-board [ttt-board]
   (apply str 
     (map-indexed 
       (fn [index spot] 
-        (str (display_spot spot) 
-             (make_rows index))) 
-      ttt_board)))
+        (str (display-spot spot) 
+             (make-rows index))) 
+      ttt-board)))
 
-(defn print_game_board [ttt_board]
-  (println (display_game_board ttt_board)))
+(defn print-game-board [ttt-board]
+  (println (display-game-board ttt-board)))
