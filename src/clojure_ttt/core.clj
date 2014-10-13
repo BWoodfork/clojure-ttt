@@ -21,13 +21,13 @@
 
 (defn run-game []
   (newline)
-  (println "Welcome to Tic-Tac-Toe. The grid is numbered from 0-8. Select a number to fill in a space with your token.")
+  (welcome-message)
   (newline)
   (print-game-board (ttt-board board-length))
   (loop [board-in-play (ttt-board board-length)
          turn-count 0]
         (if (game-over? board-in-play)
-          (println (get-winning-token board-in-play))
+          (println (get-winning-token board-in-play) (is-the-winner))
           (let [new-board (fill-space board-in-play (get-current-player-move board-in-play turn-count) (current-token board-in-play))]
             (print-game-board new-board)
             (recur new-board
