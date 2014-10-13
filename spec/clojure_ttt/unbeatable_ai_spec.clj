@@ -3,18 +3,18 @@
             [clojure-ttt.unbeatable_ai :refer :all]))
 
 (describe "unbeatable ai"
-  (it "should return a score of -1 if the game is over"
+  (it "should return a score of _1 if the game is over"
     (let [gameover_board ["X" "X" "X"
                           "O" "O" nil
                           nil nil nil]]
-          (should= -1 (score_board gameover_board "O"))))
-  (it "should return a score of -1 if there is a tie game"
+          (should= 1 (score_board gameover_board "O"))))
+  (it "should return a score of _1 if there is a tie game"
     (let [tie_board ["X" "O" "X"
                      "O" "X" "O"
                      "O" "X" "O"]]
           (should= 0 (score_board tie_board "O"))))
 
-  (it "should return a score of -1 if there is a tie game"
+  (it "should return a score of _1 if there is a tie game"
     (let [tie_board ["O" "O" nil
                      "O" "X" "X"
                      "O" nil "X"]]
@@ -51,7 +51,9 @@
           new_board ["X" "O" "X"
                      "X" "O" "O"
                      "O" "X" "X"]]
-           (should= new_board (board_after_move old_board "X" 7))))
+           (should= new_board 
+            (with-in-str "7"
+              (board_after_move old_board "X" 7)))))
 
   (it "should return the updated board after two moves have been made"
     (let [old_board ["X" "O" "X"
@@ -59,61 +61,49 @@
                      nil nil "X"]
           new_board ["X" "O" "X"
                      "X" "O" "O"
-                     nil "X" "X"]]
-           (should= new_board (board_after_move old_board "X" 7))))
-
-  (it "should return the score of 0 when almost a tie game"
-    (let [almost_tie_board ["X" "O" "X"
-                            "X" "O" "O"
-                            "O" "X" nil]]
-          (should= '(0) (score_moves almost_tie_board "O"))))
-
-  (it "should return the top corner move to tie the game"
-      (let [almost_tie_board [nil "O" "X"
-                              "X" "O" "O"
-                              "O" "X" "X"]]
-            (should= '(0) (score_moves almost_tie_board "O"))))
-
-  (it "should return the score 1 if result is a win"
-      (let [almost_won_board ["O" "O" "X"
-                              "X" "X" nil
-                              "O" "O" "X"]]
-            (should= '(-1) (score_moves almost_won_board "O"))))
-
-    (it "should return the score 0 if the game is not over"
-      (let [almost_won_board ["O" nil "X"
-                              "X" "X" nil
-                              "O" "O" "X"]]
-            (should= '(0 0) (score_moves almost_won_board "O"))))
-
-    (it "should return multiple scores if result is almost a win"
-      (let [almost_won_board ["X" "O" nil
-                              "O" "X" nil
-                              "X" "O" nil]]
-            (should= '(-1 0 -1) (score_moves almost_won_board "O"))))
-
-    (it "should return multiple scores if result is almost a loss"
-      (let [almost_loss_board ["O" "X" nil
-                               "X" "O" "X"
-                               "O" "X" nil]]
-            (should= '(1 1) (score_moves almost_loss_board "O"))))
+                     nil "O" "X"]]
+           (should= new_board (board_after_move old_board "O" 7))))
 
     (it "should return the score of the board and the move if the game is over"
-      (let [game-over-board ["X" "O" "X"
+      (let [game_over_board ["X" "O" "X"
                              "O" "O" "X"
                              "X" nil nil]]
-              (should= [-1 7] (minimax game-over-board "O" 7 0))))
+              (should= [1 7] (minimax game_over_board "O" 7))))
 
-    ; (it "should return score and the move for a potential win for 'X'"
-    ;   (let [game-over-board ["X" nil nil
-    ;                          nil nil nil
-    ;                          nil nil nil]]
-    ;           (should= ['(0 0 0 0 0 0 0) 4] (minimax game-over-board "O" 4 0))))
+    (it "should return a score of 0 for index 4 after one move has been made"
+      (let [one_move_board ["X" nil nil
+                            nil nil nil
+                            nil nil nil]]
+              (should= [0 4] (minimax one_move_board "O" 4))))
 
-    ; (it "should return score and the move for a potential win for 'X'"
-    ;   (let [game-over-board ["X" nil nil
-    ;                          nil "O" nil
-    ;                          "X" nil nil]]
-    ;           (should= ['(0 0 0 0 0) 3] (minimax game-over-board "O" 3 0))))
+    (it "should return score and the move for a potential win for 'X'"
+      (let [game_over_board ["X" nil nil
+                             nil "O" nil
+                             "X" nil nil]]
+              (should= [0 3] (minimax game_over_board "O" 3))))
+
+    (it "should return score and the move for a potential win for 'X'"
+      (let [game_over_board ["X" nil nil
+                             nil "O" nil
+                             "X" nil nil]]
+              (should= [0 3] (minimax game_over_board "O" 3))))
+
+    (it "should return score and the move for a potential win for 'X'"
+      (let [game_over_board ["X" nil nil
+                             nil "O" nil
+                             "X" nil nil]]
+              (should= [0 3] (get_best_scored_move game_over_board "O"))))
+
+    (it "should return score and the move for a potential win for 'X'"
+      (let [random_board ["X" nil nil
+                          nil "O" nil
+                          "X" nil nil]]
+              (should= [0 3] (get_best_scored_move random_board "O"))))
+
+    (it "should return score and the move for a potential win for 'X'"
+      (let [random_board ["X" nil nil
+                          nil "O" nil
+                          "X" nil nil]]
+              (should= 3 (get_minimax_move random_board "O"))))
 
 )

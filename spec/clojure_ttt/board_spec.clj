@@ -27,6 +27,23 @@
                 nil nil nil] (fill_space ["X" nil nil
                                           nil nil nil
                                           nil nil nil] 1 "O")))
+    (it "should check to see if move is valid"
+       (let [board [nil nil nil
+                    nil nil nil
+                    nil nil nil]] 
+                (should= true (valid_move? board 0))))
+
+    (it "should return false if move is invalid"
+       (let [board [nil nil nil
+                    nil nil nil
+                    nil nil nil]] 
+                (should= false (valid_move? board 10))))
+
+    (it "should return false if move is already filled"
+       (let [board ["X" nil nil
+                    nil nil nil
+                    nil nil nil]] 
+                (should= false (valid_move? board 0))))
 
     (it "should return the indexes of the board spots"
       (should= [0 1 2 3 4 5 6 7 8] (get_board_indexes [nil nil nil
