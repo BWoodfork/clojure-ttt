@@ -29,8 +29,8 @@
   ;   (let [board ["X" nil nil
   ;                nil nil nil
   ;                nil nil nil]]
-  ;         (should= 0
-  ;           (with-in-str "0"
+  ;         (should= "some string"
+  ;           (with-out-str "some string"
   ;             (get-player-move board)))))
 
 )

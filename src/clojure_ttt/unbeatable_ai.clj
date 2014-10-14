@@ -1,11 +1,6 @@
 (ns clojure-ttt.unbeatable_ai
-  (:use [clojure-ttt.ttt_rules :only [game-over?]])
-  (:use [clojure-ttt.ttt_rules :only [tie-game?]])
-  (:use [clojure-ttt.board :only [get-empty-spaces]])
-  (:use [clojure-ttt.board :only [fill-space]])
-  (:use [clojure-ttt.ttt_rules :only [current-token]])
-  (:use [clojure-ttt.ttt_rules :only [get-winning-token]])
-  (:use [clojure-ttt.ttt_rules :only [opponent-token]]))
+  (:use [clojure-ttt.ttt_rules :only [game-over? tie-game? current-token get-winning-token opponent-token]])
+  (:use [clojure-ttt.board :only [get-empty-spaces fill-space]]))
 
 (declare minimax)
 (declare get-best-scored-move)
