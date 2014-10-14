@@ -15,6 +15,12 @@
   (if (valid-move? ttt-board index)
     (assoc ttt-board index (current-token ttt-board))))
 
+(defn get-board-indexes [ttt-board]
+  (into [] (range (count ttt-board))))
+
+(defn get-token [ttt-board index]
+  (get ttt-board index))
+
 (defn get-empty-spaces [ttt-board]
   (remove nil? 
     (into [] 

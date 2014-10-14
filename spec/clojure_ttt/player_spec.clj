@@ -25,6 +25,14 @@
             (with-in-str "3"
               (get-computer-move board)))))
 
+  ; (it "gets the move of the current human player on the board"
+  ;   (let [board ["X" nil nil
+  ;                nil nil nil
+  ;                nil nil nil]]
+  ;         (should= 0
+  ;           (with-in-str "0"
+  ;             (get-player-move board)))))
+
 )
 
 

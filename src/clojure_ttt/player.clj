@@ -7,7 +7,7 @@
 (defn get-move-number []
   (Integer. (read-line)))
 
-(defn- convert-computer-move-to-number [ttt-board]
+(defn convert-computer-move-to-number [ttt-board]
   (Integer. (get-minimax-move ttt-board (current-token ttt-board))))
 
 (defn player-move []

@@ -45,6 +45,21 @@
                     nil nil nil]] 
                 (should= false (valid-move? board 0))))
 
+    (it "should return the indexes of the board spots"
+      (should= [0 1 2 3 4 5 6 7 8] (get-board-indexes [nil nil nil
+                                                       nil nil nil
+                                                       nil nil nil])))
+
+    (it "should return the token at a given index"
+      (should= "X" (get-token ["X" nil nil
+                               nil nil nil
+                               nil nil nil] 0)))
+
+    (it "should return the token at any given index"
+      (should= "O" (get-token [nil "O" nil
+                               nil nil nil
+                               nil nil nil] 1)))
+
     (it "should return the indexes for empty spaces on the board"
       (should= [0 1 2] (get-empty-spaces [nil nil nil
                                           "X" "O" "X"
