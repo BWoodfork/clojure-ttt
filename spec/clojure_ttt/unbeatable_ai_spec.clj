@@ -20,30 +20,6 @@
                      "O" nil "X"]]
           (should= 1 (score-board tie-board "O"))))
 
-  (it "should return the move [8] that has been made on board"
-    (let [board ["X" "O" "X"
-                 "X" "O" "O"
-                 "O" "X" nil]]
-          (should= '(8) (get-moves board))))
-
-  (it "should return the move [7] that has been made on board"
-    (let [board ["X" "O" "X"
-                 "X" "O" "O"
-                 "O" nil "X"]]
-          (should= '(7) (get-moves board))))
-
-  (it "should return the move [7] and [8] that has been made on board"
-    (let [board ["X" "O" "X"
-                 "X" "O" "O"
-                 "O" nil nil]]
-          (should= '(7 8) (get-moves board))))
-
-  (it "should return the moves 2 4 5 7 that has been made on board"
-    (let [board ["X" "O" nil
-                 nil "X" nil
-                 "X" nil "O"]]
-          (should= '(2 3 5 7) (get-moves board))))
-
   (it "should return the updated board after a move has been made"
     (let [old-board ["X" "O" "X"
                      "X" "O" "O"

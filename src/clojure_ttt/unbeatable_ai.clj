@@ -1,6 +1,6 @@
 (ns clojure-ttt.unbeatable_ai
   (:use [clojure-ttt.ttt_rules :only [game-over? tie-game? current-token get-winning-token opponent-token]])
-  (:use [clojure-ttt.board :only [get-empty-spaces fill-space]]))
+  (:use [clojure-ttt.board :only [get-empty-spaces fill-space get-empty-spaces]]))
 
 (declare minimax)
 (declare get-best-scored-move)
@@ -12,9 +12,6 @@
     (= (get-winning-token ttt-board) nil) 0
   ))
 
-(defn get-moves [ttt-board]
-  (get-empty-spaces ttt-board))
-
 (defn board-after-move [ttt-board token index]
   (fill-space ttt-board index token))
 
@@ -25,7 +22,7 @@
       [(* -1 (first (get-best-scored-move board-in-play (opponent-token board-in-play)))) index])))
 
 (defn get-best-scored-move [ttt-board token]
-  (apply max-key first (map (partial minimax ttt-board token) (get-moves ttt-board))))
+  (apply max-key first (map (partial minimax ttt-board token) (get-empty-spaces ttt-board))))
 
 (defn get-minimax-move [ttt-board token]
   (second (get-best-scored-move ttt-board token)))
