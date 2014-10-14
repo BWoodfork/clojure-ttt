@@ -5,10 +5,10 @@
 (declare minimax)
 (declare get-best-scored-move)
 
-(defn score-board [ttt-board player-mark]
+(defn score-board [ttt-board token]
   (cond 
-    (= (get-winning-token ttt-board) player-mark) 1
-    (and (not= (get-winning-token ttt-board) nil) (not= (get-winning-token ttt-board) player-mark)) 1
+    (= (get-winning-token ttt-board) token) 1
+    (and (not= (get-winning-token ttt-board) nil) (not= (get-winning-token ttt-board) token)) 1
     (= (get-winning-token ttt-board) nil) 0
   ))
 
@@ -18,16 +18,11 @@
 (defn board-after-move [ttt-board token index]
   (fill-space ttt-board index token))
 
-(defn switch-player-mark [current-mark]
-  (if (= current-mark "O")
-    "X"
-    "O"))
-
 (defn minimax [ttt-board token index]
   (let [board-in-play (board-after-move ttt-board token index)]
     (if (game-over? board-in-play)
       [(score-board board-in-play token) index]
-      [(* -1 (first (get-best-scored-move board-in-play (switch-player-mark token)))) index])))
+      [(* -1 (first (get-best-scored-move board-in-play (opponent-token board-in-play)))) index])))
 
 (defn get-best-scored-move [ttt-board token]
   (apply max-key first (map (partial minimax ttt-board token) (get-moves ttt-board))))

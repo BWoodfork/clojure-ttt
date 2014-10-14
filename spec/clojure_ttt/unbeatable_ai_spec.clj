@@ -76,25 +76,13 @@
                             nil nil nil]]
               (should= [0 4] (minimax one-move-board "O" 4))))
 
-    (it "should return score and the move for a potential win for 'X'"
+    (it "should return score of 0 at index 3 when game is a definite tie for the future"
       (let [game-over-board ["X" nil nil
                              nil "O" nil
                              "X" nil nil]]
               (should= [0 3] (minimax game-over-board "O" 3))))
 
-    (it "should return score and the move for a potential win for 'X'"
-      (let [game-over-board ["X" nil nil
-                             nil "O" nil
-                             "X" nil nil]]
-              (should= [0 3] (minimax game-over-board "O" 3))))
-
-    (it "should return score and the move for a potential win for 'X'"
-      (let [game-over-board ["X" nil nil
-                             nil "O" nil
-                             "X" nil nil]]
-              (should= [0 3] (get-best-scored-move game-over-board "O"))))
-
-    (it "should return score and the move for a potential win for 'X'"
+    (it "should return score and the move for a potential win for 'O'"
       (let [random-board ["X" nil nil
                           nil "O" nil
                           "X" nil nil]]

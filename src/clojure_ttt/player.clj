@@ -22,3 +22,8 @@
 
 (defn get-computer-move [ttt-board]
   (convert-computer-move-to-number ttt-board))
+
+(defn get-current-player-move [ttt-board number]
+  (if (even? number)
+    (get-player-move ttt-board)
+    (get-computer-move ttt-board)))
