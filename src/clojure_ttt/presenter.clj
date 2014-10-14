@@ -5,7 +5,7 @@
   (if (= spot nil) index spot))
 
 (defn make-rows [index]
-  (if (= (rem index board-length) (- board-length 1)) \newline "|"))
+  (if (= (rem (+ 1 index) board-length) 0) \newline "|"))
 
 (defn display-game-board [ttt-board]
   (apply str 

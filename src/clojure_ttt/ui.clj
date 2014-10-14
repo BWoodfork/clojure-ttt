@@ -2,7 +2,7 @@
   (:use [clojure-ttt.ttt_rules])
   (:use [clojure-ttt.board]))
 
-(defn print-message [message]
+(defn print-message [& message]
   (println message))
 
 (defn print-message [message]
@@ -16,3 +16,6 @@
 
 (defn wrong-move []
   (print-message "Wrong move bro. Pick another spot."))
+
+(defn add-space []
+  (newline))

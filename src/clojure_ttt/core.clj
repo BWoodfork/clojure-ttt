@@ -6,9 +6,9 @@
   (:use [clojure-ttt.ui]))
 
 (defn run-game []
-  (newline)
+  (add-space)
   (welcome-message)
-  (newline)
+  (add-space)
   (print-game-board (ttt-board board-length))
   (loop [board-in-play (ttt-board board-length)
          turn-count 0]
