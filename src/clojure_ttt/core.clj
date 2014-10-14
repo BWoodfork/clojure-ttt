@@ -1,13 +1,8 @@
 (ns clojure-ttt.core
-  (:use [clojure-ttt.ttt_rules :only [game-over?]])
-  (:use [clojure-ttt.ttt_rules :only [current-token]])
-  (:use [clojure-ttt.board :only [ttt-board]])
-  (:use [clojure-ttt.board :only [board-length]])
-  (:use [clojure-ttt.board :only [fill-space]])
+  (:use [clojure-ttt.ttt_rules :only [game-over? current-token get-winning-token]])
+  (:use [clojure-ttt.board :only [ttt-board board-length fill-space]])
   (:use [clojure-ttt.presenter :only [print-game-board]])
-  (:use [clojure-ttt.player :only [get-player-move]])
-  (:use [clojure-ttt.player :only [get-computer-move]])
-  (:use [clojure-ttt.ttt_rules :only [get-winning-token]])
+  (:use [clojure-ttt.player :only [get-player-move get-computer-move]])
   (:use [clojure-ttt.ui]))
 
 (defn get-move []
