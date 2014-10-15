@@ -6,15 +6,20 @@
   (:use [clojure-ttt.ui]))
 
 (defn run-game []
-  (add-space)
   (welcome-message)
-  (add-space)
+  (add-empty-space)
   (print-game-board (ttt-board board-length))
   (loop [board-in-play (ttt-board board-length)
          turn-count 0]
+          (if (not (game-over? board-in-play))
+            (print-message (current-player-message board-in-play))
+            (do (print-message (game-over-message))
+              (print-message (is-the-winner board-in-play))
+              (add-empty-space)))
         (if (game-over? board-in-play)
-          (println (get-winning-token board-in-play) (is-the-winner))
+          (print-message (better-luck))
           (let [new-board (fill-space board-in-play (get-current-player-move board-in-play turn-count) (current-token board-in-play))]
+            (add-extra-empty-space)
             (print-game-board new-board)
             (recur new-board
               (inc turn-count))))))

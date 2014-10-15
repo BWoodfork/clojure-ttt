@@ -1,1 +1,9 @@
-This is my Clojure Tic-Tac-Toe game. I'm currently adding features to it, but it is fully functional as of October 13th 2014. The only option currently is to play human vs the unbeatable computer. If you think you can beat the computer, go ahead and click on the 'git clone' button on this page. Open the directory that you've cloned this to and type 'lein run' (without the quotes) and the game will run for you! Good luck!
+This is my human vs AI Clojure Tic-Tac-Toe game.
+Just as it will be in the future, per Skynet, the AI is smarter than you.
+The AI will either win or force a tie game. 
+
+To get started, you will need to have Clojure installed. 
+If you do not have Clojure installed, go here for instructions : http://leiningen.org/#install
+
+Click on gitclone and clone this repo to a directory on your machine.
+Open up that directory and type 'lein run' (without the quotes) and the game will begin. 
