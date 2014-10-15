@@ -1,11 +1,12 @@
 (ns clojure-ttt.presenter
-  (:use [clojure-ttt.board :only [board-length]]))
+  (:use [clojure-ttt.board :only [board-length]])
+  (:use [clojure-ttt.ui :only [print-message]]))
 
 (defn display-spot [index spot]
   (if (= spot nil) index spot))
 
 (defn make-rows [index]
-  (if (= (rem index board-length) (- board-length 1)) \newline "|"))
+  (if (= (rem index board-length) (- board-length 1)) \newline "  |  "))
 
 (defn display-game-board [ttt-board]
   (apply str 
@@ -16,4 +17,4 @@
       ttt-board)))
 
 (defn print-game-board [ttt-board]
-  (println (display-game-board ttt-board)))
+  (print-message (display-game-board ttt-board)))

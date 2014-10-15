@@ -2,14 +2,12 @@
   (:use [clojure-ttt.ttt_rules])
   (:use [clojure-ttt.board]))
 
-(defn print-message [& message]
-  (println message))
-
 (defn print-message [message]
   (println message))
 
 (defn welcome-message []
-  (print-message "Welcome to Tic-Tac-Toe. The grid is numbered from 0-8. Select a number to fill in a space with your token."))
+  (print-message "Welcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
+It's you, versus an unbeatable AI.\nThink you can beat a genius? Make a move and see.\nPlayer 'X' has the first move."))
 
 (defn is-the-winner []
   (print-message "is the winner of this game sucka!"))

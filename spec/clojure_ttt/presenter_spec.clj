@@ -16,10 +16,10 @@
     (should= \newline (make-rows 2)))
 
   (it "should insert a pipe when index is 1"
-    (should= "|" (make-rows 1)))
+    (should= "  |  " (make-rows 1)))
 
   (it "should display a 3x3 game board"
-    (should= "0|1|2\n3|4|5\n6|7|8\n" (display-game-board [nil nil nil
+    (should= "0  |  1  |  2\n3  |  4  |  5\n6  |  7  |  8\n" (display-game-board [nil nil nil
                                                           nil nil nil
                                                           nil nil nil])))
 
