@@ -5,9 +5,6 @@
 (defn print-message [message]
   (println message))
 
-(defn print-messages [messages]
-  (print-str messages))
-
 (defn is-the-winner [ttt-board]
   (print-str (get-winning-token ttt-board) "is the winner of this game sucka!"))
 
@@ -27,7 +24,7 @@
   (print-str "Better luck next time =)"))
 
 (defn welcome-message []
-  (print-str (add-empty-space) "Welcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
+  (print-str "Welcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
 It's you, versus an unbeatable AI.\nThink you can beat a genius? Make a move and see.\nPlayer 'X' has the first move." ))
 
 (defn add-extra-empty-space []
