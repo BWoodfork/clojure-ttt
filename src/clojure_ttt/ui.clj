@@ -23,3 +23,8 @@
 (defn welcome-message []
   (print-str "\nWelcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
 It's you, versus an unbeatable AI.\nThink you can beat a genius? Make a move and see.\nPlayer 'X' has the first move.\n" ))
+
+(defn end-game-messages [ttt-board]
+  (print-message (game-over-message))
+  (print-message (is-the-winner ttt-board))
+  (print-message (better-luck)))

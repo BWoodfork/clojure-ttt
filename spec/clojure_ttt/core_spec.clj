@@ -15,10 +15,11 @@
             (get-current-player-move board turn)))))
 )
 
-; (describe "game loop"
-;   (it "should expect to get some input if the game is not over"
-;     (with-redefs [ttt-board [nil nil nil
-;                              nil nil nil
-;                              nil nil nil]
-;                   ]
-;       (should= "something" (with-out-str (game-loop))))))
+(describe "game loop"
+  (it "should output the welcome message string when the game loop runs"
+      (with-redefs [game-over? (constantly true)]
+          (should-contain "\nWelcome" (with-out-str (run-game)))))
+
+  (it "")
+
+)

@@ -10,9 +10,7 @@
          turn-count 0]
           (if (game-over? board-in-play)
             (do
-                (print-message (game-over-message))
-                (print-message (is-the-winner board-in-play))
-                (print-message (better-luck)))
+              (end-game-messages board-in-play))
           (let [new-board (fill-space board-in-play (get-current-player-move board-in-play turn-count) (current-token board-in-play))]
             (print-message (current-player-message board-in-play))
             (print-game-board new-board)
