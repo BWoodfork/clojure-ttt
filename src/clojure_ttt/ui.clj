@@ -6,7 +6,7 @@
   (println message))
 
 (defn is-the-winner [ttt-board]
-  (print-str (get-winning-token ttt-board) "is the winner of this game sucka!"))
+  (print-str (get-winning-token ttt-board) "is the winner of this game sucka!\n"))
 
 (defn wrong-move []
   (print-message "Wrong move bro. Pick another spot."))
@@ -14,20 +14,12 @@
 (defn game-over-message []
   (interpose "" "Game over"))
 
-(defn add-empty-space []
-  (newline))
-
 (defn current-player-message [ttt-board]
-  (print-str "The current player is:" (current-token ttt-board) "select a space number to make a move."))
+  (print-str "\nThe current player is:" (current-token ttt-board) "select a space number to make a move.\n \n"))
 
 (defn better-luck []
-  (print-str "Better luck next time =)"))
+  (print-str "Better luck next time =)\n"))
 
 (defn welcome-message []
-  (print-str "Welcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
-It's you, versus an unbeatable AI.\nThink you can beat a genius? Make a move and see.\nPlayer 'X' has the first move." ))
-
-(defn add-extra-empty-space []
-  (add-empty-space)
-  (add-empty-space)
-  (add-empty-space))
+  (print-str "\nWelcome to the game of Tic-Tac-Toe.\nThe board's empty spots are labeled from 0 - 8.\nSelect the spot number that you would like to play to begin.\n
+It's you, versus an unbeatable AI.\nThink you can beat a genius? Make a move and see.\nPlayer 'X' has the first move.\n" ))

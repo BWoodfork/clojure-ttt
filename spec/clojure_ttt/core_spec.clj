@@ -14,3 +14,11 @@
           (should= 0
             (get-current-player-move board turn)))))
 )
+
+; (describe "game loop"
+;   (it "should expect to get some input if the game is not over"
+;     (with-redefs [ttt-board [nil nil nil
+;                              nil nil nil
+;                              nil nil nil]
+;                   ]
+;       (should= "something" (with-out-str (game-loop))))))
